@@ -1,1 +1,115 @@
-t
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #484848;
+    padding: 20px 0;
+}
+
+#output {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    color: #333;
+    white-space: pre-line; /* Preserve line breaks */
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+  
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+</style>
+
+<script>
+    async function analyzeText(event) {
+        event.preventDefault();
+        const textField = document.getElementById("text");
+        const actionSelect = document.getElementById("action");
+
+        const currentURL = window.location.href;
+        const analyzeURL = currentURL + 'analyze';
+
+        const response = await fetch(analyzeURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `text=${textField.value}&action=${actionSelect.value}`,
+        });
+
+        const jsonData = await response.json();
+
+        if (jsonData.error) {
+            document.getElementById('output').innerText = `Error: ${jsonData.error}`;
+        } else {
+            document.getElementById('output').innerText = jsonData.output;
+        }
+    }
+</script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to ReadAid</h1>
+
+    <form onsubmit="analyzeText(event)">
+      <label for="text">Enter your text below:</label><br>
+      <textarea id="text" name="text" placeholder="Enter text here..."></textarea><br>
+      <label for="action">Choose an action:</label>
+      <select id="action" name="action">
+        <option value="Summarize">Summarize</option>
+        <option value="Insight Analysis">Insight Analysis</option>
+        <option value="Simplest Explanation">Simplest Explanation</option>
+        <option value="Detect Tone">Detect Tone</option>
+        <option value="Define Word">Define Word</option>
+      </select><br>
+      <button type="submit">Analyze Text</button>
+    </form>
+
+    <pre id="output"></pre> <!-- Use pre element for output -->
+
+</div>
+
+</body>
+</html>
+
+</body>
+</html>
