@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 CORS(app)
-openai.api_key = os.environ.get('OPENAI_API_KEY')  # Replace with your OpenAI API key
+openai.api_key = os.environ.get("OPENAI_API_KEY")  # Replace with your OpenAI API key
 
 @app.route('/analyze', methods=['POST'])
 @cross_origin()
