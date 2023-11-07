@@ -15,7 +15,7 @@ def analyze_text():
 
     try:
         if action == 'Summarize':
-            prompt = "Summarize the following text digestibly in as few words as you can: " + text
+            prompt = "Summarize the following text digestibly in as few words as you can, preferably no more than a sentence: " + text
             response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=80, temperature=0.3)
             output = response.choices[0].text.strip()
         elif action == 'Insight Analysis':
@@ -29,6 +29,10 @@ def analyze_text():
         elif action == 'Detect Tone':
             prompt = "As a master linguist, describe the tone of the following text in as few words as possible: " + text
             response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=80, temperature=0.2)
+            output = response.choices[0].text.strip()
+        elif action == 'AnswerIt':
+            prompt = "Answer the following question extremely concisely: " + text
+            response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=150, temperature=0.5)
             output = response.choices[0].text.strip()
         elif action == 'Define Word':
             words = text.split()
