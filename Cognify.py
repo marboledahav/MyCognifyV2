@@ -15,20 +15,20 @@ def analyze_text():
 
     try:
         if action == 'Summarize':
-            prompt = "As a professor of English, please summarize the following text elegantly and understandably while also writing at a high level in less than 100 tokens: " + text
-            response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=100, temperature=0.3)
+            prompt = "Summarize the following text digestibly in as few words as you can: " + text
+            response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=80, temperature=0.3)
             output = response.choices[0].text.strip()
         elif action == 'Insight Analysis':
-            prompt = "As a master in philosophy and professor in literature, what are the key themes and insights in the following text elegantly and understandably while also writing at a high level in less than 100 tokens, take the style of the text itself and use context of the book in which the text is if it is in a book: " + text
-            response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=100, temperature=0.3)
+            prompt = "As a master of literature, make an analysis of the following text based on themes, symbols, etc... in as few words as possible: " + text
+            response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=80, temperature=0.3)
             output = response.choices[0].text.strip()
         elif action == 'Simplest Explanation':
-            prompt = "You are a master linguist and have won awards in literature, please explain the following text in the simplest words possible in less than 100 tokens: " + text
-            response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=100, temperature=0.2)
+            prompt = "Explain the following text like you would to a 6 year old in as few words as possible: " + text
+            response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=80, temperature=0.2)
             output = response.choices[0].text.strip()
         elif action == 'Detect Tone':
-            prompt = "As a master linguist, please analyze and describe the tone of the following text elegantly and understandably while also writing at a high level in less than 100 tokens: " + text
-            response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=100, temperature=0.2)
+            prompt = "As a master linguist, describe the tone of the following text in as few words as possible: " + text
+            response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=80, temperature=0.2)
             output = response.choices[0].text.strip()
         elif action == 'Define Word':
             words = text.split()
@@ -37,7 +37,7 @@ def analyze_text():
             word = words[0]
             try:
                 prompt = f"You are an expert lexicographer. Format your response the way you'd see it in the dictionary. Define the word: " + text
-                response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=100, temperature=0.0)
+                response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=80, temperature=0.0)
                 output = response.choices[0].text.strip()
             except Exception as e:
                 output = {word: f"Error: {str(e)}"}
