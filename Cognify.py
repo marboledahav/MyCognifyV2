@@ -11,7 +11,7 @@ def query_chat_model(prompt):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": "You are a helpful assistant. You are helping students better understand content of complex texts by simplifying, explaining, defining, answering and giving insight."},
             {"role": "user", "content": prompt}
         ],
         max_tokens=150
